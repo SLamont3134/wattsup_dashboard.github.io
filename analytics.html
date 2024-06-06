@@ -28,6 +28,13 @@
             font-size: 1.5em;
             color: #AA4EB0; /* Light purple text */
             font-family: 'Bebas Neue', sans-serif;
+            display: flex;
+            align-items: center;
+        }
+        header h1 img {
+            height: 240px; /* Adjust the height of the icon as needed */
+            width: 416;
+            margin-right: 10px; /* Space between the icon and the title */
         }
         .user-info {
             display: flex;
@@ -62,7 +69,6 @@
             list-style-type: none;
             padding: 0;
             margin-top: 20px;
-            width: 100%;
         }
         nav ul li {
             margin: 10px 0;
@@ -75,10 +81,8 @@
             padding: 10px;
             border-radius: 5px;
             transition: background-color 0.3s, color 0.3s;
-            width: 100%;
-            text-align: center;
         }
-        nav ul li a.active, nav ul li a:hover {
+        nav ul li a:hover {
             background-color: #AA4EB0; /* Light purple background */
             color: #fff; /* White text on hover */
         }
@@ -93,14 +97,6 @@
         .content {
             width: 75%; /* 3/4 width of the screen */
         }
-        .chart-box {
-            border: 1px solid #3b4c6b; /* Dark blue border */
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
-            background-color: #171F40; /* Dark background */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
         .charger-box {
             border: 3px solid #AA4EB0; /* Thick pink border */
             border-radius: 8px;
@@ -110,6 +106,8 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             cursor: pointer;
             transition: background-color 0.3s, transform 0.3s;
+            display: flex;
+            flex-direction: column;
         }
         .charger-box:hover {
             background-color: #AA4EB0; /* Light purple background */
@@ -291,7 +289,10 @@
 </head>
 <body>
     <header>
-        <h1>WattsUp Analytics V:0.001</h1>
+        <h1>
+            <img src="wattsup_icon.png" alt="Icon">
+            WattsUp Analytics V:0.001
+        </h1>
         <div class="user-info">
             <label>Username:</label>
             <span>Wattsup EV</span>
@@ -303,9 +304,6 @@
             <ul>
                 <li><a href="index.html">Dashboard</a></li>
                 <li><a href="analytics.html" class="active">Analytics</a></li>
-                <li><a href="#">Calendar</a></li>
-                <li><a href="#">Contact Us</a></li>
-                <li><a href="#">Settings</a></li>
             </ul>
         </nav>
         <main>
