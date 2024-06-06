@@ -3,29 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>WattsUp Dashboard 0.001</title>
+    <title>WattsUp Dashboard V:0.001</title>
     <link href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Helmet&family=Jost:wght@400&display=swap" rel="stylesheet">
     <style>
         body {
-            background: #1b1e23; /* Dark background */
+            background: #171F40; /* Dark background */
             color: #d1d5db; /* Light gray text */
-            font-family: 'Arial', sans-serif;
+            font-family: 'Jost', sans-serif;
             display: flex;
             flex-direction: column;
             height: 100vh;
             margin: 0;
         }
         header {
-            background: #272b30; /* Darker background for header */
+            background: #171F40; /* Dark background for header */
             padding: 10px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3); /* Enhanced shadow */
         }
         header h1 {
             font-size: 1.5em;
-            color: #1e90ff; /* Light blue text */
+            color: #AA4EB0; /* Light purple text */
+            font-family: 'Bebas Neue', sans-serif;
+            display: flex;
+            align-items: center;
+        }
+        header h1 img {
+            height: 240px; /* Adjust the height of the icon as needed */
+            width: 416;
+            margin-right: 10px; /* Space between the icon and the title */
         }
         .user-info {
             display: flex;
@@ -42,9 +51,9 @@
         }
         nav {
             width: 250px;
-            background: #272b30; /* Darker background for sidebar */
+            background: #171F40; /* Dark background for sidebar */
             padding: 20px;
-            box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+            box-shadow: 2px 0 10px rgba(0,0,0,0.3); /* Enhanced shadow */
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
@@ -53,7 +62,8 @@
         nav h2 {
             font-size: 1.2em;
             margin-bottom: 20px;
-            color: #1e90ff; /* Light blue text */
+            color: #AA4EB0; /* Light purple text */
+            font-family: 'Helmet', sans-serif;
         }
         nav ul {
             list-style-type: none;
@@ -73,14 +83,14 @@
             transition: background-color 0.3s, color 0.3s;
         }
         nav ul li a:hover {
-            background-color: #1e90ff; /* Light blue background */
+            background-color: #AA4EB0; /* Light purple background */
             color: #fff; /* White text on hover */
         }
         main {
             flex: 1;
             padding: 20px;
             overflow-y: auto;
-            background: #1b1e23; /* Dark background */
+            background: #171F40; /* Dark background */
             display: flex;
             justify-content: center;
         }
@@ -88,35 +98,39 @@
             width: 75%; /* 3/4 width of the screen */
         }
         .charger-box {
-            border: 1px solid #3b4c6b; /* Dark blue border */
+            border: 3px solid #AA4EB0; /* Thick pink border */
             border-radius: 8px;
             padding: 20px;
             margin: 20px 0;
-            background-color: #272b30; /* Darker blue background */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background-color: #fff; /* White background */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Enhanced shadow */
             cursor: pointer;
             transition: background-color 0.3s, transform 0.3s;
+            display: flex;
+            flex-direction: column;
+            position: relative;
         }
         .charger-box:hover {
-            background-color: #1e90ff; /* Light blue background */
+            background-color: #AA4EB0; /* Light purple background */
             transform: translateY(-5px); /* Lift effect */
         }
         .charger-box h3 {
             margin-top: 0;
-            color: #fff; /* White text */
+            color: #171F40; /* Dark purple text */
+            font-family: 'Bebas Neue', sans-serif;
         }
         .charger-box p {
             display: block;
             margin: 5px 0;
-            color: #d1d5db; /* Light gray text */
+            color: #171F40; /* Dark purple text */
         }
         .component-box {
-            border: 1px solid #3b4c6b; /* Dark blue border */
+            border: 3px solid #AA4EB0; /* Thick pink border */
             border-radius: 8px;
             padding: 20px;
-            background-color: #1b1e23; /* Dark background */
+            background-color: #fff; /* White background */
             margin-top: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Enhanced shadow */
         }
         .status-green {
             color: #28a745; /* Green */
@@ -137,7 +151,7 @@
             color: #ffc107; /* Yellow */
         }
         h2, h3 {
-            color: #fff; /* White text */
+            color: #AA4EB0; /* Light purple text */
         }
         .components {
             display: none;
@@ -147,14 +161,14 @@
             border: 1px solid #3b4c6b; /* Dark blue border */
             border-radius: 8px;
             padding: 20px;
-            background-color: #272b30; /* Darker blue background */
+            background-color: #AA4EB0; /* Light purple background */
             margin-top: 40px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Enhanced shadow */
             text-align: center;
         }
         .support button {
             cursor: pointer;
-            background-color: #1e90ff; /* Light blue background */
+            background-color: #171F40; /* Dark purple background */
             color: #fff; /* White text */
             border: none;
             border-radius: 4px;
@@ -173,7 +187,7 @@
             text-align: center;
         }
         footer a {
-            color: #1e90ff; /* Light blue text */
+            color: #AA4EB0; /* Light purple text */
             text-decoration: none;
             transition: color 0.3s;
         }
@@ -183,10 +197,11 @@
         .anomalies {
             display: none;
             margin-top: 10px;
-            background-color: #1b1e23; /* Dark background */
+            background-color: #fff; /* White background */
             padding: 10px;
             border-radius: 4px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Enhanced shadow */
+            border: 3px solid #AA4EB0; /* Thick pink border */
         }
         .anomalies ul {
             list-style-type: none;
@@ -197,13 +212,40 @@
         }
         .anomalies ul li span {
             display: block;
-            color: #d1d5db; /* Light gray text */
+            color: #171F40; /* Dark purple text */
+        }
+        .section {
+            border: 1px solid #3b4c6b;
+            padding: 10px;
+            margin: 10px;
+            background-color: #fff; /* White background */
+            color: #171F40; /* Dark purple text */
+            border-radius: 8px;
+            flex: 1;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Enhanced shadow */
+        }
+        .section h4 {
+            margin-top: 0;
+            font-family: 'Helmet', sans-serif;
+            color: #AA4EB0; /* Light purple text */
+        }
+        .section-container {
+            display: flex;
+        }
+        .arrow {
+            margin-top: 10px;
+            align-self: center;
+            font-size: 1.5em;
+            color: #171F40;
         }
     </style>
     <script>
-        function toggleComponents(id) {
+        function toggleComponents(id, arrowId) {
             const components = document.getElementById(id);
-            components.style.display = components.style.display === 'none' ? 'flex' : 'none';
+            const arrow = document.getElementById(arrowId);
+            const isExpanded = components.style.display === 'flex';
+            components.style.display = isExpanded ? 'none' : 'flex';
+            arrow.textContent = isExpanded ? '▼' : '▲';
         }
 
         function toggleAnomalies(event, id) {
@@ -219,7 +261,10 @@
 </head>
 <body>
     <header>
-        <h1>WattsUp Dashboard 0.001</h1>
+        <h1>
+            <img src="wattsup_icon.png" alt="Icon">
+            WattsUp Dashboard V:0.001
+        </h1>
         <div class="user-info">
             <label>Username:</label>
             <span>Wattsup EV</span>
@@ -231,9 +276,6 @@
             <ul>
                 <li><a href="index.html" class="active">Dashboard</a></li>
                 <li><a href="analytics.html">Analytics</a></li>
-                <li><a href="#">Calendar</a></li>
-                <li><a href="#">Contact Us</a></li>
-                <li><a href="#">Settings</a></li>
             </ul>
         </nav>
         
@@ -243,14 +285,34 @@
                     <h2>Charger Overview</h2>
                     <h3>Monitor the health of all EV chargers</h3>
                 </hgroup>
-                <div class="charger-box status-green" onclick="toggleComponents('components0')">
+                <div class="charger-box status-green" onclick="toggleComponents('components0', 'arrow0')">
                     <h3>Charger 0 (EVgo)</h3>
-                    <p>Status: <span class="status-green">Healthy</span></p>
-                    <p>Location: Parking Lot D</p>
-                    <p>Online: <span class="status-green">Online</span></p>
-                    <p>Power Capability: 100kW</p>
-                    <p>Part Number: EVG-10001</p>
-                    <p>Manufacturer: EVgo</p>
+                    <div class="section-container">
+                        <div class="section">
+                            <h4>Details</h4>
+                            <p>Power Capability: 100kW</p>
+                            <p>Part Number: EVG-10001</p>
+                            <p>Manufacturer: EVgo</p>
+                        </div>
+                        <div class="section">
+                            <h4>Location</h4>
+                            <p>Location: Parking Lot D</p>
+                            <p>GPS Coordinates: 37.7749° N, 122.4194° W</p>
+                            <p>Temperature: 70°F</p>
+                        </div>
+                        <div class="section">
+                            <h4>Workflow</h4>
+                            <p>Automated Workflow: Yes</p>
+                            <p>Last Serviced: 01/01/2024</p>
+                            <p>Work In Progress: No</p>
+                        </div>
+                        <div class="section">
+                            <h4>Status</h4>
+                            <p>Health: <span class="status-green">Healthy</span></p>
+                            <p>Connectivity: <span class="status-green">Online</span></p>
+                            <p>Average Uptime: 99%</p>
+                        </div>
+                    </div>
                     <div id="components0" class="components">
                         <div class="component-box">
                             <h3>Power Module 1</h3>
@@ -285,15 +347,36 @@
                             <p>Supplier: Danfoss</p>
                         </div>
                     </div>
+                    <div class="arrow" id="arrow0">▼</div>
                 </div>
-                <div class="charger-box status-red" onclick="toggleComponents('components1')">
+                <div class="charger-box status-red" onclick="toggleComponents('components1', 'arrow1')">
                     <h3>Charger 1 (EVgo)</h3>
-                    <p>Status: <span class="status-red">Poor</span></p>
-                    <p>Location: Parking Lot A</p>
-                    <p>Online: <span class="status-green">Online</span></p>
-                    <p>Power Capability: 50kW</p>
-                    <p>Part Number: EVG-10002</p>
-                    <p>Manufacturer: EVgo</p>
+                    <div class="section-container">
+                        <div class="section">
+                            <h4>Details</h4>
+                            <p>Power Capability: 50kW</p>
+                            <p>Part Number: EVG-10002</p>
+                            <p>Manufacturer: EVgo</p>
+                        </div>
+                        <div class="section">
+                            <h4>Location</h4>
+                            <p>Location: Parking Lot A</p>
+                            <p>GPS Coordinates: 37.7749° N, 122.4194° W</p>
+                            <p>Temperature: 68°F</p>
+                        </div>
+                        <div class="section">
+                            <h4>Workflow</h4>
+                            <p>Automated Workflow: No</p>
+                            <p>Last Serviced: 12/15/2023</p>
+                            <p>Work In Progress: Yes</p>
+                        </div>
+                        <div class="section">
+                            <h4>Status</h4>
+                            <p>Health: <span class="status-red">Poor</span></p>
+                            <p>Connectivity: <span class="status-green">Online</span></p>
+                            <p>Average Uptime: 95%</p>
+                        </div>
+                    </div>
                     <div id="components1" class="components">
                         <div class="component-box">
                             <h3>Power Module 1</h3>
@@ -304,7 +387,7 @@
                             <p>Supplier: ABB</p>
                             <p>Estimated failure date: 01/02/2025. Component ordered, technician scheduled for 01/02/2025</p>
                             <p class="status-message status-message-red">Immediate attention required!</p>
-                            <p>Minor anomalies detected, no projected failure date at this time. We are monitoring this component closely. <a href="#" onclick="toggleAnomalies(event, 'anomalies1'); return false;">Click here to view anomalies</a></p>
+                            <p><a href="#" onclick="toggleAnomalies(event, 'anomalies1'); return false;">Click here to view anomalies</a></p>
                             <div id="anomalies1" class="anomalies">
                                 <ul>
                                     <li><span>Type: Voltage Spike, Date: 06/01/2024, Level of Concern: Medium</span></li>
@@ -344,7 +427,7 @@
                             <p>Supplier: Danfoss</p>
                             <p>Estimated failure date: 01/02/2025. Component ordered, technician scheduled for 01/02/2025</p>
                             <p class="status-message status-message-red">Immediate attention required!</p>
-                            <p>Minor anomalies detected, no projected failure date at this time. We are monitoring this component closely. <a href="#" onclick="toggleAnomalies(event, 'anomalies3'); return false;">Click here to view anomalies</a></p>
+                            <p><a href="#" onclick="toggleAnomalies(event, 'anomalies3'); return false;">Click here to view anomalies</a></p>
                             <div id="anomalies3" class="anomalies">
                                 <ul>
                                     <li><span>Type: Voltage Spike, Date: 06/01/2024, Level of Concern: Medium</span></li>
@@ -353,15 +436,36 @@
                             </div>
                         </div>
                     </div>
+                    <div class="arrow" id="arrow1">▼</div>
                 </div>
-                <div class="charger-box status-yellow" onclick="toggleComponents('components2')">
+                <div class="charger-box status-yellow" onclick="toggleComponents('components2', 'arrow2')">
                     <h3>Charger 2 (Electrify America)</h3>
-                    <p>Status: <span class="status-yellow">Warning</span></p>
-                    <p>Location: Parking Lot B</p>
-                    <p>Online: <span class="status-red">Offline</span></p>
-                    <p>Power Capability: 150kW</p>
-                    <p>Part Number: EA-10003</p>
-                    <p>Manufacturer: Electrify America</p>
+                    <div class="section-container">
+                        <div class="section">
+                            <h4>Details</h4>
+                            <p>Power Capability: 150kW</p>
+                            <p>Part Number: EA-10003</p>
+                            <p>Manufacturer: Electrify America</p>
+                        </div>
+                        <div class="section">
+                            <h4>Location</h4>
+                            <p>Location: Parking Lot B</p>
+                            <p>GPS Coordinates: 37.7749° N, 122.4194° W</p>
+                            <p>Temperature: 72°F</p>
+                        </div>
+                        <div class="section">
+                            <h4>Workflow</h4>
+                            <p>Automated Workflow: Yes</p>
+                            <p>Last Serviced: 02/20/2024</p>
+                            <p>Work In Progress: No</p>
+                        </div>
+                        <div class="section">
+                            <h4>Status</h4>
+                            <p>Health: <span class="status-yellow">Warning</span></p>
+                            <p>Connectivity: <span class="status-red">Offline</span></p>
+                            <p>Average Uptime: 85%</p>
+                        </div>
+                    </div>
                     <div id="components2" class="components">
                         <div class="component-box">
                             <h3>Power Module 1</h3>
@@ -410,15 +514,36 @@
                             <p>Supplier: Danfoss</p>
                         </div>
                     </div>
+                    <div class="arrow" id="arrow2">▼</div>
                 </div>
-                <div class="charger-box status-yellow" onclick="toggleComponents('components3')">
+                <div class="charger-box status-yellow" onclick="toggleComponents('components3', 'arrow3')">
                     <h3>Charger 3 (ChargePoint)</h3>
-                    <p>Status: <span class="status-yellow">Moderate</span></p>
-                    <p>Location: Parking Lot C</p>
-                    <p>Online: <span class="status-green">Online</span></p>
-                    <p>Power Capability: 125kW</p>
-                    <p>Part Number: CP-10004</p>
-                    <p>Manufacturer: ChargePoint</p>
+                    <div class="section-container">
+                        <div class="section">
+                            <h4>Details</h4>
+                            <p>Power Capability: 125kW</p>
+                            <p>Part Number: CP-10004</p>
+                            <p>Manufacturer: ChargePoint</p>
+                        </div>
+                        <div class="section">
+                            <h4>Location</h4>
+                            <p>Location: Parking Lot C</p>
+                            <p>GPS Coordinates: 37.7749° N, 122.4194° W</p>
+                            <p>Temperature: 69°F</p>
+                        </div>
+                        <div class="section">
+                            <h4>Workflow</h4>
+                            <p>Automated Workflow: Yes</p>
+                            <p>Last Serviced: 03/15/2024</p>
+                            <p>Work In Progress: No</p>
+                        </div>
+                        <div class="section">
+                            <h4>Status</h4>
+                            <p>Health: <span class="status-yellow">Moderate</span></p>
+                            <p>Connectivity: <span class="status-green">Online</span></p>
+                            <p>Average Uptime: 90%</p>
+                        </div>
+                    </div>
                     <div id="components3" class="components">
                         <div class="component-box">
                             <h3>Power Module 1</h3>
@@ -444,7 +569,7 @@
                             <p>Supplier: Siemens</p>
                             <p>Estimated failure date: 01/02/2025. Component ordered, technician scheduled for 01/02/2025</p>
                             <p class="status-message status-message-red">Immediate attention required!</p>
-                            <p>Minor anomalies detected, no projected failure date at this time. We are monitoring this component closely. <a href="#" onclick="toggleAnomalies(event, 'anomalies7'); return false;">Click here to view anomalies</a></p>
+                            <p><a href="#" onclick="toggleAnomalies(event, 'anomalies7'); return false;">Click here to view anomalies</a></p>
                             <div id="anomalies7" class="anomalies">
                                 <ul>
                                     <li><span>Type: Voltage Spike, Date: 06/01/2024, Level of Concern: Medium</span></li>
@@ -476,12 +601,12 @@
                             </div>
                         </div>
                     </div>
+                    <div class="arrow" id="arrow3">▼</div>
                 </div>
                 <section class="support">
                     <hgroup>
                         <h2>Technical Support</h2>
-                        <h3>Contact us for assistance</h3>
-                    </hgroup>
+                        <h3>Contact us for assistance</hgroup>
                     <button onclick="showPopup()">Get Help</button>
                 </section>
                 <footer>

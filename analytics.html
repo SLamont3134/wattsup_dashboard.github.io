@@ -3,48 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>WattsUp Analytics 0.001</title>
+    <title>WattsUp Analytics V:0.001</title>
     <link href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Helmet&family=Jost:wght@400&display=swap" rel="stylesheet">
     <style>
         body {
-            background: #1b1e23;
-            color: #d1d5db;
-            font-family: 'Arial', sans-serif;
+            background: #171F40; /* Dark background */
+            color: #d1d5db; /* Light gray text */
+            font-family: 'Jost', sans-serif;
             display: flex;
             flex-direction: column;
             height: 100vh;
             margin: 0;
         }
         header {
-            background: #272b30;
+            background: #171F40; /* Dark background for header */
             padding: 10px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3); /* Enhanced shadow */
         }
         header h1 {
             font-size: 1.5em;
-            color: #1e90ff;
+            color: #AA4EB0; /* Light purple text */
+            font-family: 'Bebas Neue', sans-serif;
+            display: flex;
+            align-items: center;
+        }
+        header h1 img {
+            height: 240px; /* Adjust the height of the icon as needed */
+            width: 416px;
+            margin-right: 10px; /* Space between the icon and the title */
         }
         .user-info {
             display: flex;
             align-items: center;
         }
         .user-info label {
-            color: #d1d5db;
+            color: #d1d5db; /* Light gray text */
             font-weight: bold;
         }
         .user-info span {
             margin-left: 10px;
-            color: #d1d5db;
+            color: #d1d5db; /* Light gray text */
             font-weight: bold;
         }
         nav {
             width: 250px;
-            background: #272b30;
+            background: #171F40; /* Dark background for sidebar */
             padding: 20px;
-            box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+            box-shadow: 2px 0 10px rgba(0,0,0,0.3); /* Enhanced shadow */
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
@@ -53,108 +62,129 @@
         nav h2 {
             font-size: 1.2em;
             margin-bottom: 20px;
-            color: #1e90ff;
+            color: #AA4EB0; /* Light purple text */
+            font-family: 'Helmet', sans-serif;
         }
         nav ul {
             list-style-type: none;
             padding: 0;
             margin-top: 20px;
-            width: 100%;
         }
         nav ul li {
             margin: 10px 0;
         }
         nav ul li a {
             text-decoration: none;
-            color: #d1d5db;
+            color: #d1d5db; /* Light gray text */
             font-weight: bold;
             display: block;
             padding: 10px;
             border-radius: 5px;
             transition: background-color 0.3s, color 0.3s;
-            width: 100%;
-            text-align: center;
         }
-        nav ul li a.active, nav ul li a:hover {
-            background-color: #1e90ff;
-            color: #fff;
+        nav ul li a:hover {
+            background-color: #AA4EB0; /* Light purple background */
+            color: #fff; /* White text on hover */
         }
         main {
             flex: 1;
             padding: 20px;
             overflow-y: auto;
-            background: #1b1e23;
+            background: #171F40; /* Dark background */
             display: flex;
             justify-content: center;
         }
         .content {
-            width: 75%;
-        }
-        .chart-box {
-            border: 1px solid #3b4c6b;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
-            background-color: #272b30;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 75%; /* 3/4 width of the screen */
         }
         .charger-box {
-            border: 1px solid #3b4c6b;
+            border: 3px solid #AA4EB0; /* Thick pink border */
             border-radius: 8px;
             padding: 20px;
             margin: 20px 0;
-            background-color: #272b30;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background-color: #fff; /* White background */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Enhanced shadow */
             cursor: pointer;
             transition: background-color 0.3s, transform 0.3s;
+            display: flex;
+            flex-direction: column;
+            position: relative;
         }
         .charger-box:hover {
-            background-color: #1e90ff;
-            transform: translateY(-5px);
+            background-color: #AA4EB0; /* Light purple background */
+            transform: translateY(-5px); /* Lift effect */
+        }
+        .charger-box h3 {
+            margin-top: 0;
+            color: #171F40; /* Dark purple text */
+            font-family: 'Bebas Neue', sans-serif;
+        }
+        .charger-box p {
+            display: block;
+            margin: 5px 0;
+            color: #171F40; /* Dark purple text */
         }
         .minimize-box {
-            border: 1px solid #3b4c6b;
+            border: 1px solid #3b4c6b; /* Dark blue border */
             border-radius: 8px;
             padding: 10px;
             margin: 10px 0;
-            background-color: #272b30;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background-color: #AA4EB0; /* Light purple background */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Enhanced shadow */
             cursor: pointer;
             text-align: center;
             color: #fff;
         }
         h2, h3 {
-            color: #fff;
+            color: #AA4EB0; /* Light purple text */
         }
         .analytics {
             display: none;
         }
+        .chart-box {
+            margin: 20px 0;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Enhanced shadow */
+        }
         footer {
-            border-top: 1px solid #3b4c6b;
+            border-top: 1px solid #3b4c6b; /* Dark blue border */
             padding-top: 10px;
             margin-top: 40px;
             text-align: center;
         }
         footer a {
-            color: #1e90ff;
+            color: #AA4EB0; /* Light purple text */
             text-decoration: none;
             transition: color 0.3s;
         }
         footer a:hover {
-            color: #fff;
+            color: #fff; /* White on hover */
+        }
+        .arrow {
+            margin-top: 10px;
+            align-self: center;
+            font-size: 1.5em;
+            color: #171F40;
         }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        function toggleAnalytics(id) {
+        function toggleAnalytics(id, arrowId) {
             const analytics = document.getElementById(id);
+            const arrow = document.getElementById(arrowId);
             const allAnalytics = document.querySelectorAll('.analytics');
             allAnalytics.forEach(item => {
                 if (item !== analytics) {
                     item.style.display = 'none';
+                    const arrow = document.getElementById('arrow' + item.id.replace('analytics', ''));
+                    arrow.textContent = '▼';
                 }
             });
-            analytics.style.display = analytics.style.display === 'none' ? 'block' : 'none';
+            const isExpanded = analytics.style.display === 'block';
+            analytics.style.display = isExpanded ? 'none' : 'block';
+            arrow.textContent = isExpanded ? '▼' : '▲';
         }
 
         document.addEventListener('DOMContentLoaded', function () {
@@ -210,8 +240,8 @@
                         datasets: [{
                             label: 'Usage (kWh)',
                             data: config.usageData,
-                            backgroundColor: 'rgba(30, 144, 255, 0.2)',
-                            borderColor: 'rgba(30, 144, 255, 1)',
+                            backgroundColor: 'rgba(170, 78, 176, 0.2)',
+                            borderColor: 'rgba(170, 78, 176, 1)',
                             borderWidth: 1
                         }]
                     },
@@ -232,8 +262,8 @@
                         datasets: [{
                             label: 'Efficiency (%)',
                             data: config.efficiencyData,
-                            backgroundColor: 'rgba(40, 167, 69, 0.2)',
-                            borderColor: 'rgba(40, 167, 69, 1)',
+                            backgroundColor: 'rgba(170, 78, 176, 0.2)',
+                            borderColor: 'rgba(170, 78, 176, 1)',
                             borderWidth: 1
                         }]
                     },
@@ -278,7 +308,10 @@
 </head>
 <body>
     <header>
-        <h1>WattsUp Analytics</h1>
+        <h1>
+            <img src="wattsup_icon.png" alt="Icon">
+            WattsUp Analytics V:0.001
+        </h1>
         <div class="user-info">
             <label>Username:</label>
             <span>Wattsup EV</span>
@@ -290,9 +323,6 @@
             <ul>
                 <li><a href="index.html">Dashboard</a></li>
                 <li><a href="analytics.html" class="active">Analytics</a></li>
-                <li><a href="#">Calendar</a></li>
-                <li><a href="#">Contact Us</a></li>
-                <li><a href="#">Settings</a></li>
             </ul>
         </nav>
         <main>
@@ -302,9 +332,10 @@
                     <h3>Monitor the performance and efficiency of all EV chargers</h3>
                 </hgroup>
 
-                <div class="charger-box" onclick="toggleAnalytics('analytics0')">
+                <div class="charger-box" onclick="toggleAnalytics('analytics0', 'arrow0')">
                     <h3>Charger 0 (EVgo)</h3>
                     <p>Location: Parking Lot D</p>
+                    <div class="arrow" id="arrow0">▼</div>
                 </div>
                 <div id="analytics0" class="analytics">
                     <div class="chart-box">
@@ -319,12 +350,13 @@
                         <h3>Anomalies Breakdown</h3>
                         <canvas id="anomaliesChart0" width="400" height="200"></canvas>
                     </div>
-                    <div class="minimize-box" onclick="toggleAnalytics('analytics0')">Minimize</div>
+                    <div class="minimize-box" onclick="toggleAnalytics('analytics0', 'arrow0')">Minimize</div>
                 </div>
 
-                <div class="charger-box" onclick="toggleAnalytics('analytics1')">
+                <div class="charger-box" onclick="toggleAnalytics('analytics1', 'arrow1')">
                     <h3>Charger 1 (EVgo)</h3>
                     <p>Location: Parking Lot A</p>
+                    <div class="arrow" id="arrow1">▼</div>
                 </div>
                 <div id="analytics1" class="analytics">
                     <div class="chart-box">
@@ -339,12 +371,13 @@
                         <h3>Anomalies Breakdown</h3>
                         <canvas id="anomaliesChart1" width="400" height="200"></canvas>
                     </div>
-                    <div class="minimize-box" onclick="toggleAnalytics('analytics1')">Minimize</div>
+                    <div class="minimize-box" onclick="toggleAnalytics('analytics1', 'arrow1')">Minimize</div>
                 </div>
 
-                <div class="charger-box" onclick="toggleAnalytics('analytics2')">
+                <div class="charger-box" onclick="toggleAnalytics('analytics2', 'arrow2')">
                     <h3>Charger 2 (Electrify America)</h3>
                     <p>Location: Parking Lot B</p>
+                    <div class="arrow" id="arrow2">▼</div>
                 </div>
                 <div id="analytics2" class="analytics">
                     <div class="chart-box">
@@ -359,12 +392,13 @@
                         <h3>Anomalies Breakdown</h3>
                         <canvas id="anomaliesChart2" width="400" height="200"></canvas>
                     </div>
-                    <div class="minimize-box" onclick="toggleAnalytics('analytics2')">Minimize</div>
+                    <div class="minimize-box" onclick="toggleAnalytics('analytics2', 'arrow2')">Minimize</div>
                 </div>
 
-                <div class="charger-box" onclick="toggleAnalytics('analytics3')">
+                <div class="charger-box" onclick="toggleAnalytics('analytics3', 'arrow3')">
                     <h3>Charger 3 (ChargePoint)</h3>
                     <p>Location: Parking Lot C</p>
+                    <div class="arrow" id="arrow3">▼</div>
                 </div>
                 <div id="analytics3" class="analytics">
                     <div class="chart-box">
@@ -379,7 +413,7 @@
                         <h3>Anomalies Breakdown</h3>
                         <canvas id="anomaliesChart3" width="400" height="200"></canvas>
                     </div>
-                    <div class="minimize-box" onclick="toggleAnalytics('analytics3')">Minimize</div>
+                    <div class="minimize-box" onclick="toggleAnalytics('analytics3', 'arrow3')">Minimize</div>
                 </div>
 
                 <footer>
