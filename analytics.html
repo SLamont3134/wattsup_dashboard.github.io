@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>WattsUp Analytics</title>
+    <link href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #1b1e23;
+            color: #d1d5db;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+        }
+        header {
+            background: #272b30;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        header h1 {
+            font-size: 1.5em;
+            color: #1e90ff;
+        }
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+        .user-info label {
+            color: #d1d5db;
+            font-weight: bold;
+        }
+        .user-info span {
+            margin-left: 10px;
+            color: #d1d5db;
+            font-weight: bold;
+        }
+        nav {
+            width: 250px;
+            background: #272b30;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+        nav h2 {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            color: #1e90ff;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+        nav ul li {
+            margin: 20px 0;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #d1d5db;
+            font-weight: bold;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        nav ul li a:hover {
+            background-color: #1e90ff;
+            color: #fff;
+        }
+        main {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: #1b1e23;
+            display: flex;
+            justify-content: center;
+        }
+        .content {
+            width: 75%;
+        }
+        .chart-box {
+            border: 1px solid #3b4c6b;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            background-color: #272b30;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        h2, h3 {
+            color: #fff;
+        }
+        footer {
+            border-top: 1px solid #3b4c6b;
+            padding-top: 10px;
+            margin-top: 40px;
+            text-align: center;
+        }
+        footer a {
+            color: #1e90ff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        footer a:hover {
+            color: #fff;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const ctxUsage = document.getElementById('usageChart').getContext('2d');
+            const usageChart = new Chart(ctxUsage, {
+                type: 'line',
+                data: {
+                    labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+                    datasets: [{
+                        label: 'Usage (kWh)',
+                        data: [65, 59, 80, 81, 56, 55],
+                        backgroundColor: 'rgba(30, 144, 255, 0.2)',
+                        borderColor: 'rgba(30, 144, 255, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            const ctxEfficiency = document.getElementById('efficiencyChart').getContext('2d');
+            const efficiencyChart = new Chart(ctxEfficiency, {
+                type: 'bar',
+                data: {
+                    labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+                    datasets: [{
+                        label: 'Efficiency (%)',
+                        data: [85, 89, 84, 87, 85, 88],
+                        backgroundColor: 'rgba(40, 167, 69, 0.2)',
+                        borderColor: 'rgba(40, 167, 69, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            const ctxAnomalies = document.getElementById('anomaliesChart').getContext('2d');
+            const anomaliesChart = new Chart(ctxAnomalies, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Voltage Spikes', 'Temperature Fluctuations', 'Other'],
+                    datasets: [{
+                        label: 'Anomalies',
+                        data: [12, 5, 3],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <h1>WattsUp Analytics</h1>
+        <div class="user-info">
+            <label>Username:</label>
+            <span>Wattsup EV</span>
+        </div>
+    </header>
+    <div style="display: flex; flex: 1;">
+        <nav>
+            <h2>Navigation</h2>
+            <ul>
+                <li><a href="index.html">Dashboard</a></li>
+                <li><a href="analytics.html">Analytics</a></li>
+                <li><a href="#">Calendar</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">Settings</a></li>
+            </ul>
+        </nav>
+        <main>
+            <div class="content">
+                <hgroup>
+                    <h2>Analytics Overview</h2>
+                    <h3>Monitor the performance and efficiency of all EV chargers</h3>
+                </hgroup>
+                <div class="chart-box">
+                    <h3>Usage Over Time</h3>
+                    <canvas id="usageChart" width="400" height="200"></canvas>
+                </div>
+                <div class="chart-box">
+                    <h3>Efficiency Over Time</h3>
+                    <canvas id="efficiencyChart" width="400" height="200"></canvas>
+                </div>
+                <div class="chart-box">
+                    <h3>Anomalies Breakdown</h3>
+                    <canvas id="anomaliesChart" width="400" height="200"></canvas>
+                </div>
+                <footer>
+                    <small><a href="#">Privacy Policy</a> • <a href="#">Terms of Service</a></small>
+                </footer>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
