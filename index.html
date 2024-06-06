@@ -1,12 +1,493 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My GitHub Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>WattsUp Dashboard 0.001</title>
+    <link href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #1b1e23; /* Dark background */
+            color: #d1d5db; /* Light gray text */
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+        }
+        header {
+            background: #272b30; /* Darker background for header */
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        header h1 {
+            font-size: 1.5em;
+            color: #1e90ff; /* Light blue text */
+        }
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+        .user-info label {
+            color: #d1d5db; /* Light gray text */
+            font-weight: bold;
+        }
+        .user-info span {
+            margin-left: 10px;
+            color: #d1d5db; /* Light gray text */
+            font-weight: bold;
+        }
+        nav {
+            width: 250px;
+            background: #272b30; /* Darker background for sidebar */
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+        nav h2 {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            color: #1e90ff; /* Light blue text */
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+        nav ul li {
+            margin: 20px 0;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #d1d5db; /* Light gray text */
+            font-weight: bold;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        nav ul li a:hover {
+            background-color: #1e90ff; /* Light blue background */
+            color: #fff; /* White text on hover */
+        }
+        main {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: #1b1e23; /* Dark background */
+            display: flex;
+            justify-content: center;
+        }
+        .content {
+            width: 75%; /* 3/4 width of the screen */
+        }
+        .charger-box {
+            border: 1px solid #3b4c6b; /* Dark blue border */
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            background-color: #272b30; /* Darker blue background */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .charger-box:hover {
+            background-color: #1e90ff; /* Light blue background */
+            transform: translateY(-5px); /* Lift effect */
+        }
+        .charger-box h3 {
+            margin-top: 0;
+            color: #fff; /* White text */
+        }
+        .charger-box p {
+            display: block;
+            margin: 5px 0;
+            color: #d1d5db; /* Light gray text */
+        }
+        .component-box {
+            border: 1px solid #3b4c6b; /* Dark blue border */
+            border-radius: 8px;
+            padding: 20px;
+            background-color: #1b1e23; /* Dark background */
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .status-green {
+            color: #28a745; /* Green */
+        }
+        .status-yellow {
+            color: #ffc107; /* Yellow */
+        }
+        .status-red {
+            color: #dc3545; /* Red */
+        }
+        .status-message {
+            margin-top: 10px;
+        }
+        .status-message-red {
+            color: #dc3545; /* Red */
+        }
+        .status-message-yellow {
+            color: #ffc107; /* Yellow */
+        }
+        h2, h3 {
+            color: #fff; /* White text */
+        }
+        .components {
+            display: none;
+            flex-direction: column;
+        }
+        .support {
+            border: 1px solid #3b4c6b; /* Dark blue border */
+            border-radius: 8px;
+            padding: 20px;
+            background-color: #272b30; /* Darker blue background */
+            margin-top: 40px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        .support button {
+            cursor: pointer;
+            background-color: #1e90ff; /* Light blue background */
+            color: #fff; /* White text */
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            font-size: 1em;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .support button:hover {
+            background-color: #3b4c6b; /* Darker blue on hover */
+            transform: translateY(-2px); /* Lift effect */
+        }
+        footer {
+            border-top: 1px solid #3b4c6b; /* Dark blue border */
+            padding-top: 10px;
+            margin-top: 40px;
+            text-align: center;
+        }
+        footer a {
+            color: #1e90ff; /* Light blue text */
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        footer a:hover {
+            color: #fff; /* White on hover */
+        }
+        .anomalies {
+            display: none;
+            margin-top: 10px;
+            background-color: #1b1e23; /* Dark background */
+            padding: 10px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        .anomalies ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .anomalies ul li {
+            margin-bottom: 5px;
+        }
+        .anomalies ul li span {
+            display: block;
+            color: #d1d5db; /* Light gray text */
+        }
+    </style>
+    <script>
+        function toggleComponents(id) {
+            const components = document.getElementById(id);
+            components.style.display = components.style.display === 'none' ? 'flex' : 'none';
+        }
+
+        function toggleAnomalies(event, id) {
+            event.stopPropagation();
+            const anomalies = document.getElementById(id);
+            anomalies.style.display = anomalies.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function showPopup() {
+            alert("Not yet supported, Come back soon!");
+        }
+    </script>
 </head>
 <body>
-  <h1>Welcome to My GitHub Page</h1>
-  <p>This is my first GitHub Page.</p>
+    <header>
+        <h1>WattsUp Dashboard 0.001</h1>
+        <div class="user-info">
+            <label>Username:</label>
+            <span>Wattsup EV</span>
+        </div>
+    </header>
+    <div style="display: flex; flex: 1;">
+        <nav>
+            <h2>Navigation</h2>
+            <ul>
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="#">Analytics</a></li>
+                <li><a href="#">Calendar</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">Settings</a></li>
+            </ul>
+        </nav>
+        <main>
+            <div class="content">
+                <hgroup>
+                    <h2>Charger Overview</h2>
+                    <h3>Monitor the health of all EV chargers</h3>
+                </hgroup>
+                <div class="charger-box status-green" onclick="toggleComponents('components0')">
+                    <h3>Charger 0 (EVgo)</h3>
+                    <p>Status: <span class="status-green">Healthy</span></p>
+                    <p>Location: Parking Lot D</p>
+                    <p>Online: <span class="status-green">Online</span></p>
+                    <p>Power Capability: 100kW</p>
+                    <p>Part Number: EVG-10001</p>
+                    <p>Manufacturer: EVgo</p>
+                    <div id="components0" class="components">
+                        <div class="component-box">
+                            <h3>Power Module 1</h3>
+                            <p>Health: <span class="status-green">Good</span></p>
+                            <p>Estimated Life Remaining: 9 years</p>
+                            <p>Age: 1 year</p>
+                            <p>Part Number: PM-10001</p>
+                            <p>Supplier: ABB</p>
+                        </div>
+                        <div class="component-box">
+                            <h3>Power Module 2</h3>
+                            <p>Health: <span class="status-green">Good</span></p>
+                            <p>Estimated Life Remaining: 9 years</p>
+                            <p>Age: 1 year</p>
+                            <p>Part Number: PM-10002</p>
+                            <p>Supplier: Siemens</p>
+                        </div>
+                        <div class="component-box">
+                            <h3>Charge Handle</h3>
+                            <p>Health: <span class="status-green">Good</span></p>
+                            <p>Estimated Life Remaining: 9 years</p>
+                            <p>Age: 1 year</p>
+                            <p>Part Number: CH-10001</p>
+                            <p>Supplier: Phoenix Contact</p>
+                        </div>
+                        <div class="component-box">
+                            <h3>Cooling System</h3>
+                            <p>Health: <span class="status-green">Good</span></p>
+                            <p>Estimated Life Remaining: 9 years</p>
+                            <p>Age: 1 year</p>
+                            <p>Part Number: CS-10001</p>
+                            <p>Supplier: Danfoss</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="charger-box status-red" onclick="toggleComponents('components1')">
+                    <h3>Charger 1 (EVgo)</h3>
+                    <p>Status: <span class="status-red">Poor</span></p>
+                    <p>Location: Parking Lot A</p>
+                    <p>Online: <span class="status-green">Online</span></p>
+                    <p>Power Capability: 50kW</p>
+                    <p>Part Number: EVG-10002</p>
+                    <p>Manufacturer: EVgo</p>
+                    <div id="components1" class="components">
+                        <div class="component-box">
+                            <h3>Power Module 1</h3>
+                            <p>Health: <span class="status-red">Poor</span></p>
+                            <p>Estimated Life Remaining: 8 years</p>
+                            <p>Age: 2 years</p>
+                            <p>Part Number: PM-10003</p>
+                            <p>Supplier: ABB</p>
+                            <p>Estimated failure date: 01/02/2025. Component ordered, technician scheduled for 01/02/2025</p>
+                            <p class="status-message status-message-red">Immediate attention required!</p>
+                            <p>Minor anomalies detected, no projected failure date at this time. We are monitoring this component closely. <a href="#" onclick="toggleAnomalies(event, 'anomalies1'); return false;">Click here to view anomalies</a></p>
+                            <div id="anomalies1" class="anomalies">
+                                <ul>
+                                    <li><span>Type: Voltage Spike, Date: 06/01/2024, Level of Concern: Medium</span></li>
+                                    <li><span>Type: Temperature Fluctuation, Date: 05/15/2024, Level of Concern: Low</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="component-box">
+                            <h3>Power Module 2</h3>
+                            <p>Health: <span class="status-yellow">Moderate</span></p>
+                            <p>Estimated Life Remaining: 7 years</p>
+                            <p>Age: 3 years</p>
+                            <p>Part Number: PM-10004</p>
+                            <p>Supplier: Siemens</p>
+                            <p>Minor anomalies detected, no projected failure date at this time. We are monitoring this component closely. <a href="#" onclick="toggleAnomalies(event, 'anomalies2'); return false;">Click here to view anomalies</a></p>
+                            <div id="anomalies2" class="anomalies">
+                                <ul>
+                                    <li><span>Type: Voltage Spike, Date: 06/01/2024, Level of Concern: Medium</span></li>
+                                    <li><span>Type: Temperature Fluctuation, Date: 05/15/2024, Level of Concern: Low</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="component-box">
+                            <h3>Charge Handle</h3>
+                            <p>Health: <span class="status-green">Good</span></p>
+                            <p>Estimated Life Remaining: 9 years</p>
+                            <p>Age: 1 year</p>
+                            <p>Part Number: CH-10002</p>
+                            <p>Supplier: Phoenix Contact</p>
+                        </div>
+                        <div class="component-box">
+                            <h3>Cooling System</h3>
+                            <p>Health: <span class="status-red">Poor</span></p>
+                            <p>Estimated Life Remaining: 5 years</p>
+                            <p>Age: 5 years</p>
+                            <p>Part Number: CS-10002</p>
+                            <p>Supplier: Danfoss</p>
+                            <p>Estimated failure date: 01/02/2025. Component ordered, technician scheduled for 01/02/2025</p>
+                            <p class="status-message status-message-red">Immediate attention required!</p>
+                            <p>Minor anomalies detected, no projected failure date at this time. We are monitoring this component closely. <a href="#" onclick="toggleAnomalies(event, 'anomalies3'); return false;">Click here to view anomalies</a></p>
+                            <div id="anomalies3" class="anomalies">
+                                <ul>
+                                    <li><span>Type: Voltage Spike, Date: 06/01/2024, Level of Concern: Medium</span></li>
+                                    <li><span>Type: Temperature Fluctuation, Date: 05/15/2024, Level of Concern: Low</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="charger-box status-yellow" onclick="toggleComponents('components2')">
+                    <h3>Charger 2 (Electrify America)</h3>
+                    <p>Status: <span class="status-yellow">Warning</span></p>
+                    <p>Location: Parking Lot B</p>
+                    <p>Online: <span class="status-red">Offline</span></p>
+                    <p>Power Capability: 150kW</p>
+                    <p>Part Number: EA-10003</p>
+                    <p>Manufacturer: Electrify America</p>
+                    <div id="components2" class="components">
+                        <div class="component-box">
+                            <h3>Power Module 1</h3>
+                            <p>Health: <span class="status-green">Good</span></p>
+                            <p>Estimated Life Remaining: 9 years</p>
+                            <p>Age: 1 year</p>
+                            <p>Part Number: PM-10005</p>
+                            <p>Supplier: Delta Electronics</p>
+                        </div>
+                        <div class="component-box">
+                            <h3>Power Module 2</h3>
+                            <p>Health: <span class="status-yellow">Moderate</span></p>
+                            <p>Estimated Life Remaining: 6 years</p>
+                            <p>Age: 4 years</p>
+                            <p>Part Number: PM-10006</p>
+                            <p>Supplier: Siemens</p>
+                            <p>Minor anomalies detected, no projected failure date at this time. We are monitoring this component closely. <a href="#" onclick="toggleAnomalies(event, 'anomalies4'); return false;">Click here to view anomalies</a></p>
+                            <div id="anomalies4" class="anomalies">
+                                <ul>
+                                    <li><span>Type: Voltage Spike, Date: 06/01/2024, Level of Concern: Medium</span></li>
+                                    <li><span>Type: Temperature Fluctuation, Date: 05/15/2024, Level of Concern: Low</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="component-box">
+                            <h3>Charge Handle</h3>
+                            <p>Health: <span class="status-yellow">Moderate</span></p>
+                            <p>Estimated Life Remaining: 8 years</p>
+                            <p>Age: 2 years</p>
+                            <p>Part Number: CH-10003</p>
+                            <p>Supplier: Phoenix Contact</p>
+                            <p>Minor anomalies detected, no projected failure date at this time. We are monitoring this component closely. <a href="#" onclick="toggleAnomalies(event, 'anomalies5'); return false;">Click here to view anomalies</a></p>
+                            <div id="anomalies5" class="anomalies">
+                                <ul>
+                                    <li><span>Type: Voltage Spike, Date: 06/01/2024, Level of Concern: Medium</span></li>
+                                    <li><span>Type: Temperature Fluctuation, Date: 05/15/2024, Level of Concern: Low</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="component-box">
+                            <h3>Cooling System</h3>
+                            <p>Health: <span class="status-green">Good</span></p>
+                            <p>Estimated Life Remaining: 7 years</p>
+                            <p>Age: 3 years</p>
+                            <p>Part Number: CS-10003</p>
+                            <p>Supplier: Danfoss</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="charger-box status-yellow" onclick="toggleComponents('components3')">
+                    <h3>Charger 3 (ChargePoint)</h3>
+                    <p>Status: <span class="status-yellow">Moderate</span></p>
+                    <p>Location: Parking Lot C</p>
+                    <p>Online: <span class="status-green">Online</span></p>
+                    <p>Power Capability: 125kW</p>
+                    <p>Part Number: CP-10004</p>
+                    <p>Manufacturer: ChargePoint</p>
+                    <div id="components3" class="components">
+                        <div class="component-box">
+                            <h3>Power Module 1</h3>
+                            <p>Health: <span class="status-yellow">Moderate</span></p>
+                            <p>Estimated Life Remaining: 8 years</p>
+                            <p>Age: 2 years</p>
+                            <p>Part Number: PM-10007</p>
+                            <p>Supplier: Delta Electronics</p>
+                            <p>Minor anomalies detected, no projected failure date at this time. We are monitoring this component closely. <a href="#" onclick="toggleAnomalies(event, 'anomalies6'); return false;">Click here to view anomalies</a></p>
+                            <div id="anomalies6" class="anomalies">
+                                <ul>
+                                    <li><span>Type: Voltage Spike, Date: 06/01/2024, Level of Concern: Medium</span></li>
+                                    <li><span>Type: Temperature Fluctuation, Date: 05/15/2024, Level of Concern: Low</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="component-box">
+                            <h3>Power Module 2</h3>
+                            <p>Health: <span class="status-red">Poor</span></p>
+                            <p>Estimated Life Remaining: 5 years</p>
+                            <p>Age: 5 years</p>
+                            <p>Part Number: PM-10008</p>
+                            <p>Supplier: Siemens</p>
+                            <p>Estimated failure date: 01/02/2025. Component ordered, technician scheduled for 01/02/2025</p>
+                            <p class="status-message status-message-red">Immediate attention required!</p>
+                            <p>Minor anomalies detected, no projected failure date at this time. We are monitoring this component closely. <a href="#" onclick="toggleAnomalies(event, 'anomalies7'); return false;">Click here to view anomalies</a></p>
+                            <div id="anomalies7" class="anomalies">
+                                <ul>
+                                    <li><span>Type: Voltage Spike, Date: 06/01/2024, Level of Concern: Medium</span></li>
+                                    <li><span>Type: Temperature Fluctuation, Date: 05/15/2024, Level of Concern: Low</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="component-box">
+                            <h3>Charge Handle</h3>
+                            <p>Health: <span class="status-green">Good</span></p>
+                            <p>Estimated Life Remaining: 9 years</p>
+                            <p>Age: 1 year</p>
+                            <p>Part Number: CH-10004</p>
+                            <p>Supplier: Phoenix Contact</p>
+                        </div>
+                        <div class="component-box">
+                            <h3>Cooling System</h3>
+                            <p>Health: <span class="status-yellow">Moderate</span></p>
+                            <p>Estimated Life Remaining: 6 years</p>
+                            <p>Age: 4 years</p>
+                            <p>Part Number: CS-10004</p>
+                            <p>Supplier: Danfoss</p>
+                            <p>Minor anomalies detected, no projected failure date at this time. We are monitoring this component closely. <a href="#" onclick="toggleAnomalies(event, 'anomalies8'); return false;">Click here to view anomalies</a></p>
+                            <div id="anomalies8" class="anomalies">
+                                <ul>
+                                    <li><span>Type: Voltage Spike, Date: 06/01/2024, Level of Concern: Medium</span></li>
+                                    <li><span>Type: Temperature Fluctuation, Date: 05/15/2024, Level of Concern: Low</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <section class="support">
+                    <hgroup>
+                        <h2>Technical Support</h2>
+                        <h3>Contact us for assistance</h3>
+                    </hgroup>
+                    <button onclick="showPopup()">Get Help</button>
+                </section>
+                <footer>
+                    <small><a href="#">Privacy Policy</a> • <a href="#">Terms of Service</a></small>
+                </footer>
+            </div>
+        </main>
+    </div>
 </body>
 </html>
