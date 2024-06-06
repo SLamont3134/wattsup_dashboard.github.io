@@ -3,20 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>WattsUp Analytics 0.001</title>
+    <title>WattsUp Analytics V:0.001</title>
     <link href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Helmet&family=Jost:wght@400&display=swap" rel="stylesheet">
     <style>
         body {
-            background: #1b1e23;
-            color: #d1d5db;
-            font-family: 'Arial', sans-serif;
+            background: #171F40; /* Dark background */
+            color: #d1d5db; /* Light gray text */
+            font-family: 'Jost', sans-serif;
             display: flex;
             flex-direction: column;
             height: 100vh;
             margin: 0;
         }
         header {
-            background: #272b30;
+            background: #171F40; /* Dark background for header */
             padding: 10px 20px;
             display: flex;
             justify-content: space-between;
@@ -25,24 +26,25 @@
         }
         header h1 {
             font-size: 1.5em;
-            color: #1e90ff;
+            color: #AA4EB0; /* Light purple text */
+            font-family: 'Bebas Neue', sans-serif;
         }
         .user-info {
             display: flex;
             align-items: center;
         }
         .user-info label {
-            color: #d1d5db;
+            color: #d1d5db; /* Light gray text */
             font-weight: bold;
         }
         .user-info span {
             margin-left: 10px;
-            color: #d1d5db;
+            color: #d1d5db; /* Light gray text */
             font-weight: bold;
         }
         nav {
             width: 250px;
-            background: #272b30;
+            background: #171F40; /* Dark background for sidebar */
             padding: 20px;
             box-shadow: 2px 0 5px rgba(0,0,0,0.2);
             display: flex;
@@ -53,7 +55,8 @@
         nav h2 {
             font-size: 1.2em;
             margin-bottom: 20px;
-            color: #1e90ff;
+            color: #AA4EB0; /* Light purple text */
+            font-family: 'Helmet', sans-serif;
         }
         nav ul {
             list-style-type: none;
@@ -66,7 +69,7 @@
         }
         nav ul li a {
             text-decoration: none;
-            color: #d1d5db;
+            color: #d1d5db; /* Light gray text */
             font-weight: bold;
             display: block;
             padding: 10px;
@@ -76,72 +79,82 @@
             text-align: center;
         }
         nav ul li a.active, nav ul li a:hover {
-            background-color: #1e90ff;
-            color: #fff;
+            background-color: #AA4EB0; /* Light purple background */
+            color: #fff; /* White text on hover */
         }
         main {
             flex: 1;
             padding: 20px;
             overflow-y: auto;
-            background: #1b1e23;
+            background: #171F40; /* Dark background */
             display: flex;
             justify-content: center;
         }
         .content {
-            width: 75%;
+            width: 75%; /* 3/4 width of the screen */
         }
         .chart-box {
-            border: 1px solid #3b4c6b;
+            border: 1px solid #3b4c6b; /* Dark blue border */
             border-radius: 8px;
             padding: 20px;
             margin: 20px 0;
-            background-color: #272b30;
+            background-color: #171F40; /* Dark background */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         .charger-box {
-            border: 1px solid #3b4c6b;
+            border: 3px solid #AA4EB0; /* Thick pink border */
             border-radius: 8px;
             padding: 20px;
             margin: 20px 0;
-            background-color: #272b30;
+            background-color: #fff; /* White background */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             cursor: pointer;
             transition: background-color 0.3s, transform 0.3s;
         }
         .charger-box:hover {
-            background-color: #1e90ff;
-            transform: translateY(-5px);
+            background-color: #AA4EB0; /* Light purple background */
+            transform: translateY(-5px); /* Lift effect */
+        }
+        .charger-box h3 {
+            margin-top: 0;
+            color: #171F40; /* Dark purple text */
+            font-family: 'Bebas Neue', sans-serif;
+        }
+        .charger-box p {
+            display: block;
+            margin: 5px 0;
+            color: #171F40; /* Dark purple text */
         }
         .minimize-box {
-            border: 1px solid #3b4c6b;
+            border: 1px solid #3b4c6b; /* Dark blue border */
             border-radius: 8px;
             padding: 10px;
             margin: 10px 0;
-            background-color: #272b30;
+            background-color: #AA4EB0; /* Light purple background */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             cursor: pointer;
             text-align: center;
             color: #fff;
         }
         h2, h3 {
-            color: #fff;
+            color: #AA4EB0; /* Light purple text */
         }
         .analytics {
             display: none;
         }
         footer {
-            border-top: 1px solid #3b4c6b;
+            border-top: 1px solid #3b4c6b; /* Dark blue border */
             padding-top: 10px;
             margin-top: 40px;
             text-align: center;
         }
         footer a {
-            color: #1e90ff;
+            color: #AA4EB0; /* Light purple text */
             text-decoration: none;
             transition: color 0.3s;
         }
         footer a:hover {
-            color: #fff;
+            color: #fff; /* White on hover */
         }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -210,8 +223,8 @@
                         datasets: [{
                             label: 'Usage (kWh)',
                             data: config.usageData,
-                            backgroundColor: 'rgba(30, 144, 255, 0.2)',
-                            borderColor: 'rgba(30, 144, 255, 1)',
+                            backgroundColor: 'rgba(170, 78, 176, 0.2)',
+                            borderColor: 'rgba(170, 78, 176, 1)',
                             borderWidth: 1
                         }]
                     },
@@ -232,8 +245,8 @@
                         datasets: [{
                             label: 'Efficiency (%)',
                             data: config.efficiencyData,
-                            backgroundColor: 'rgba(40, 167, 69, 0.2)',
-                            borderColor: 'rgba(40, 167, 69, 1)',
+                            backgroundColor: 'rgba(170, 78, 176, 0.2)',
+                            borderColor: 'rgba(170, 78, 176, 1)',
                             borderWidth: 1
                         }]
                     },
@@ -278,7 +291,7 @@
 </head>
 <body>
     <header>
-        <h1>WattsUp Analytics</h1>
+        <h1>WattsUp Analytics V:0.001</h1>
         <div class="user-info">
             <label>Username:</label>
             <span>Wattsup EV</span>
