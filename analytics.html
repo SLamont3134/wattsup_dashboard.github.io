@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>WattsUp Analytics</title>
+    <title>WattsUp Analytics 0.001</title>
     <link href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" rel="stylesheet">
     <style>
         body {
@@ -59,9 +59,10 @@
             list-style-type: none;
             padding: 0;
             margin-top: 20px;
+            width: 100%;
         }
         nav ul li {
-            margin: 20px 0;
+            margin: 10px 0;
         }
         nav ul li a {
             text-decoration: none;
@@ -71,8 +72,10 @@
             padding: 10px;
             border-radius: 5px;
             transition: background-color 0.3s, color 0.3s;
+            width: 100%;
+            text-align: center;
         }
-        nav ul li a:hover {
+        nav ul li a.active, nav ul li a:hover {
             background-color: #1e90ff;
             color: #fff;
         }
@@ -95,8 +98,36 @@
             background-color: #272b30;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
+        .charger-box {
+            border: 1px solid #3b4c6b;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            background-color: #272b30;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .charger-box:hover {
+            background-color: #1e90ff;
+            transform: translateY(-5px);
+        }
+        .minimize-box {
+            border: 1px solid #3b4c6b;
+            border-radius: 8px;
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #272b30;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            text-align: center;
+            color: #fff;
+        }
         h2, h3 {
             color: #fff;
+        }
+        .analytics {
+            display: none;
         }
         footer {
             border-top: 1px solid #3b4c6b;
@@ -115,76 +146,132 @@
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
+        function toggleAnalytics(id) {
+            const analytics = document.getElementById(id);
+            const allAnalytics = document.querySelectorAll('.analytics');
+            allAnalytics.forEach(item => {
+                if (item !== analytics) {
+                    item.style.display = 'none';
+                }
+            });
+            analytics.style.display = analytics.style.display === 'none' ? 'block' : 'none';
+        }
+
         document.addEventListener('DOMContentLoaded', function () {
-            const ctxUsage = document.getElementById('usageChart').getContext('2d');
-            const usageChart = new Chart(ctxUsage, {
-                type: 'line',
-                data: {
-                    labels: ['January', 'February', 'March', 'April', 'May', 'June'],
-                    datasets: [{
-                        label: 'Usage (kWh)',
-                        data: [65, 59, 80, 81, 56, 55],
-                        backgroundColor: 'rgba(30, 144, 255, 0.2)',
-                        borderColor: 'rgba(30, 144, 255, 1)',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
+            const currentLocation = window.location.href;
+            const navLinks = document.querySelectorAll('nav ul li a');
+            navLinks.forEach(link => {
+                if (link.href === currentLocation) {
+                    link.classList.add('active');
                 }
             });
 
-            const ctxEfficiency = document.getElementById('efficiencyChart').getContext('2d');
-            const efficiencyChart = new Chart(ctxEfficiency, {
-                type: 'bar',
-                data: {
-                    labels: ['January', 'February', 'March', 'April', 'May', 'June'],
-                    datasets: [{
-                        label: 'Efficiency (%)',
-                        data: [85, 89, 84, 87, 85, 88],
-                        backgroundColor: 'rgba(40, 167, 69, 0.2)',
-                        borderColor: 'rgba(40, 167, 69, 1)',
-                        borderWidth: 1
-                    }]
+            const chartConfigs = [
+                {
+                    usage: 'usageChart0',
+                    efficiency: 'efficiencyChart0',
+                    anomalies: 'anomaliesChart0',
+                    usageData: [65, 59, 80, 81, 56, 55],
+                    efficiencyData: [85, 89, 84, 87, 85, 88],
+                    anomaliesData: [12, 5, 3]
                 },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
+                {
+                    usage: 'usageChart1',
+                    efficiency: 'efficiencyChart1',
+                    anomalies: 'anomaliesChart1',
+                    usageData: [60, 55, 70, 75, 50, 45],
+                    efficiencyData: [82, 85, 80, 83, 81, 84],
+                    anomaliesData: [10, 7, 4]
+                },
+                {
+                    usage: 'usageChart2',
+                    efficiency: 'efficiencyChart2',
+                    anomalies: 'anomaliesChart2',
+                    usageData: [70, 65, 75, 80, 60, 65],
+                    efficiencyData: [88, 87, 85, 86, 88, 87],
+                    anomaliesData: [14, 6, 5]
+                },
+                {
+                    usage: 'usageChart3',
+                    efficiency: 'efficiencyChart3',
+                    anomalies: 'anomaliesChart3',
+                    usageData: [55, 50, 60, 65, 45, 50],
+                    efficiencyData: [80, 82, 78, 81, 79, 80],
+                    anomaliesData: [9, 4, 3]
+                }
+            ];
+
+            chartConfigs.forEach(config => {
+                const ctxUsage = document.getElementById(config.usage).getContext('2d');
+                const usageChart = new Chart(ctxUsage, {
+                    type: 'line',
+                    data: {
+                        labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+                        datasets: [{
+                            label: 'Usage (kWh)',
+                            data: config.usageData,
+                            backgroundColor: 'rgba(30, 144, 255, 0.2)',
+                            borderColor: 'rgba(30, 144, 255, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
                         }
                     }
-                }
-            });
+                });
 
-            const ctxAnomalies = document.getElementById('anomaliesChart').getContext('2d');
-            const anomaliesChart = new Chart(ctxAnomalies, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Voltage Spikes', 'Temperature Fluctuations', 'Other'],
-                    datasets: [{
-                        label: 'Anomalies',
-                        data: [12, 5, 3],
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(255, 206, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)'
-                        ],
-                        borderColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false
-                }
+                const ctxEfficiency = document.getElementById(config.efficiency).getContext('2d');
+                const efficiencyChart = new Chart(ctxEfficiency, {
+                    type: 'bar',
+                    data: {
+                        labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+                        datasets: [{
+                            label: 'Efficiency (%)',
+                            data: config.efficiencyData,
+                            backgroundColor: 'rgba(40, 167, 69, 0.2)',
+                            borderColor: 'rgba(40, 167, 69, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+
+                const ctxAnomalies = document.getElementById(config.anomalies).getContext('2d');
+                const anomaliesChart = new Chart(ctxAnomalies, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Voltage Spikes', 'Temperature Fluctuations', 'Other'],
+                        datasets: [{
+                            label: 'Anomalies',
+                            data: config.anomaliesData,
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: true
+                    }
+                });
             });
         });
     </script>
@@ -202,7 +289,7 @@
             <h2>Navigation</h2>
             <ul>
                 <li><a href="index.html">Dashboard</a></li>
-                <li><a href="analytics.html">Analytics</a></li>
+                <li><a href="analytics.html" class="active">Analytics</a></li>
                 <li><a href="#">Calendar</a></li>
                 <li><a href="#">Contact Us</a></li>
                 <li><a href="#">Settings</a></li>
@@ -214,18 +301,87 @@
                     <h2>Analytics Overview</h2>
                     <h3>Monitor the performance and efficiency of all EV chargers</h3>
                 </hgroup>
-                <div class="chart-box">
-                    <h3>Usage Over Time</h3>
-                    <canvas id="usageChart" width="400" height="200"></canvas>
+
+                <div class="charger-box" onclick="toggleAnalytics('analytics0')">
+                    <h3>Charger 0 (EVgo)</h3>
+                    <p>Location: Parking Lot D</p>
                 </div>
-                <div class="chart-box">
-                    <h3>Efficiency Over Time</h3>
-                    <canvas id="efficiencyChart" width="400" height="200"></canvas>
+                <div id="analytics0" class="analytics">
+                    <div class="chart-box">
+                        <h3>Usage Over Time</h3>
+                        <canvas id="usageChart0" width="400" height="200"></canvas>
+                    </div>
+                    <div class="chart-box">
+                        <h3>Efficiency Over Time</h3>
+                        <canvas id="efficiencyChart0" width="400" height="200"></canvas>
+                    </div>
+                    <div class="chart-box">
+                        <h3>Anomalies Breakdown</h3>
+                        <canvas id="anomaliesChart0" width="400" height="200"></canvas>
+                    </div>
+                    <div class="minimize-box" onclick="toggleAnalytics('analytics0')">Minimize</div>
                 </div>
-                <div class="chart-box">
-                    <h3>Anomalies Breakdown</h3>
-                    <canvas id="anomaliesChart" width="400" height="200"></canvas>
+
+                <div class="charger-box" onclick="toggleAnalytics('analytics1')">
+                    <h3>Charger 1 (EVgo)</h3>
+                    <p>Location: Parking Lot A</p>
                 </div>
+                <div id="analytics1" class="analytics">
+                    <div class="chart-box">
+                        <h3>Usage Over Time</h3>
+                        <canvas id="usageChart1" width="400" height="200"></canvas>
+                    </div>
+                    <div class="chart-box">
+                        <h3>Efficiency Over Time</h3>
+                        <canvas id="efficiencyChart1" width="400" height="200"></canvas>
+                    </div>
+                    <div class="chart-box">
+                        <h3>Anomalies Breakdown</h3>
+                        <canvas id="anomaliesChart1" width="400" height="200"></canvas>
+                    </div>
+                    <div class="minimize-box" onclick="toggleAnalytics('analytics1')">Minimize</div>
+                </div>
+
+                <div class="charger-box" onclick="toggleAnalytics('analytics2')">
+                    <h3>Charger 2 (Electrify America)</h3>
+                    <p>Location: Parking Lot B</p>
+                </div>
+                <div id="analytics2" class="analytics">
+                    <div class="chart-box">
+                        <h3>Usage Over Time</h3>
+                        <canvas id="usageChart2" width="400" height="200"></canvas>
+                    </div>
+                    <div class="chart-box">
+                        <h3>Efficiency Over Time</h3>
+                        <canvas id="efficiencyChart2" width="400" height="200"></canvas>
+                    </div>
+                    <div class="chart-box">
+                        <h3>Anomalies Breakdown</h3>
+                        <canvas id="anomaliesChart2" width="400" height="200"></canvas>
+                    </div>
+                    <div class="minimize-box" onclick="toggleAnalytics('analytics2')">Minimize</div>
+                </div>
+
+                <div class="charger-box" onclick="toggleAnalytics('analytics3')">
+                    <h3>Charger 3 (ChargePoint)</h3>
+                    <p>Location: Parking Lot C</p>
+                </div>
+                <div id="analytics3" class="analytics">
+                    <div class="chart-box">
+                        <h3>Usage Over Time</h3>
+                        <canvas id="usageChart3" width="400" height="200"></canvas>
+                    </div>
+                    <div class="chart-box">
+                        <h3>Efficiency Over Time</h3>
+                        <canvas id="efficiencyChart3" width="400" height="200"></canvas>
+                    </div>
+                    <div class="chart-box">
+                        <h3>Anomalies Breakdown</h3>
+                        <canvas id="anomaliesChart3" width="400" height="200"></canvas>
+                    </div>
+                    <div class="minimize-box" onclick="toggleAnalytics('analytics3')">Minimize</div>
+                </div>
+
                 <footer>
                     <small><a href="#">Privacy Policy</a> • <a href="#">Terms of Service</a></small>
                 </footer>
