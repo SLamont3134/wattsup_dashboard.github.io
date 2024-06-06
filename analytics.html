@@ -108,6 +108,7 @@
             transition: background-color 0.3s, transform 0.3s;
             display: flex;
             flex-direction: column;
+            position: relative;
         }
         .charger-box:hover {
             background-color: #AA4EB0; /* Light purple background */
@@ -154,18 +155,29 @@
         footer a:hover {
             color: #fff; /* White on hover */
         }
+        .arrow {
+            margin-top: 10px;
+            align-self: center;
+            font-size: 1.5em;
+            color: #171F40;
+        }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        function toggleAnalytics(id) {
+        function toggleAnalytics(id, arrowId) {
             const analytics = document.getElementById(id);
+            const arrow = document.getElementById(arrowId);
             const allAnalytics = document.querySelectorAll('.analytics');
             allAnalytics.forEach(item => {
                 if (item !== analytics) {
                     item.style.display = 'none';
+                    const arrow = document.getElementById('arrow' + item.id.replace('analytics', ''));
+                    arrow.textContent = '▼';
                 }
             });
-            analytics.style.display = analytics.style.display === 'none' ? 'block' : 'none';
+            const isExpanded = analytics.style.display === 'block';
+            analytics.style.display = isExpanded ? 'none' : 'block';
+            arrow.textContent = isExpanded ? '▼' : '▲';
         }
 
         document.addEventListener('DOMContentLoaded', function () {
@@ -313,9 +325,10 @@
                     <h3>Monitor the performance and efficiency of all EV chargers</h3>
                 </hgroup>
 
-                <div class="charger-box" onclick="toggleAnalytics('analytics0')">
+                <div class="charger-box" onclick="toggleAnalytics('analytics0', 'arrow0')">
                     <h3>Charger 0 (EVgo)</h3>
                     <p>Location: Parking Lot D</p>
+                    <div class="arrow" id="arrow0">▼</div>
                 </div>
                 <div id="analytics0" class="analytics">
                     <div class="chart-box">
@@ -330,12 +343,13 @@
                         <h3>Anomalies Breakdown</h3>
                         <canvas id="anomaliesChart0" width="400" height="200"></canvas>
                     </div>
-                    <div class="minimize-box" onclick="toggleAnalytics('analytics0')">Minimize</div>
+                    <div class="minimize-box" onclick="toggleAnalytics('analytics0', 'arrow0')">Minimize</div>
                 </div>
 
-                <div class="charger-box" onclick="toggleAnalytics('analytics1')">
+                <div class="charger-box" onclick="toggleAnalytics('analytics1', 'arrow1')">
                     <h3>Charger 1 (EVgo)</h3>
                     <p>Location: Parking Lot A</p>
+                    <div class="arrow" id="arrow1">▼</div>
                 </div>
                 <div id="analytics1" class="analytics">
                     <div class="chart-box">
@@ -350,12 +364,13 @@
                         <h3>Anomalies Breakdown</h3>
                         <canvas id="anomaliesChart1" width="400" height="200"></canvas>
                     </div>
-                    <div class="minimize-box" onclick="toggleAnalytics('analytics1')">Minimize</div>
+                    <div class="minimize-box" onclick="toggleAnalytics('analytics1', 'arrow1')">Minimize</div>
                 </div>
 
-                <div class="charger-box" onclick="toggleAnalytics('analytics2')">
+                <div class="charger-box" onclick="toggleAnalytics('analytics2', 'arrow2')">
                     <h3>Charger 2 (Electrify America)</h3>
                     <p>Location: Parking Lot B</p>
+                    <div class="arrow" id="arrow2">▼</div>
                 </div>
                 <div id="analytics2" class="analytics">
                     <div class="chart-box">
@@ -370,12 +385,13 @@
                         <h3>Anomalies Breakdown</h3>
                         <canvas id="anomaliesChart2" width="400" height="200"></canvas>
                     </div>
-                    <div class="minimize-box" onclick="toggleAnalytics('analytics2')">Minimize</div>
+                    <div class="minimize-box" onclick="toggleAnalytics('analytics2', 'arrow2')">Minimize</div>
                 </div>
 
-                <div class="charger-box" onclick="toggleAnalytics('analytics3')">
+                <div class="charger-box" onclick="toggleAnalytics('analytics3', 'arrow3')">
                     <h3>Charger 3 (ChargePoint)</h3>
                     <p>Location: Parking Lot C</p>
+                    <div class="arrow" id="arrow3">▼</div>
                 </div>
                 <div id="analytics3" class="analytics">
                     <div class="chart-box">
@@ -390,7 +406,7 @@
                         <h3>Anomalies Breakdown</h3>
                         <canvas id="anomaliesChart3" width="400" height="200"></canvas>
                     </div>
-                    <div class="minimize-box" onclick="toggleAnalytics('analytics3')">Minimize</div>
+                    <div class="minimize-box" onclick="toggleAnalytics('analytics3', 'arrow3')">Minimize</div>
                 </div>
 
                 <footer>

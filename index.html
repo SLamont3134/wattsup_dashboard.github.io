@@ -108,6 +108,7 @@
             transition: background-color 0.3s, transform 0.3s;
             display: flex;
             flex-direction: column;
+            position: relative;
         }
         .charger-box:hover {
             background-color: #AA4EB0; /* Light purple background */
@@ -230,11 +231,20 @@
         .section-container {
             display: flex;
         }
+        .arrow {
+            margin-top: 10px;
+            align-self: center;
+            font-size: 1.5em;
+            color: #171F40;
+        }
     </style>
     <script>
-        function toggleComponents(id) {
+        function toggleComponents(id, arrowId) {
             const components = document.getElementById(id);
-            components.style.display = components.style.display === 'none' ? 'flex' : 'none';
+            const arrow = document.getElementById(arrowId);
+            const isExpanded = components.style.display === 'flex';
+            components.style.display = isExpanded ? 'none' : 'flex';
+            arrow.textContent = isExpanded ? '▼' : '▲';
         }
 
         function toggleAnomalies(event, id) {
@@ -274,7 +284,7 @@
                     <h2>Charger Overview</h2>
                     <h3>Monitor the health of all EV chargers</h3>
                 </hgroup>
-                <div class="charger-box status-green" onclick="toggleComponents('components0')">
+                <div class="charger-box status-green" onclick="toggleComponents('components0', 'arrow0')">
                     <h3>Charger 0 (EVgo)</h3>
                     <div class="section-container">
                         <div class="section">
@@ -336,8 +346,9 @@
                             <p>Supplier: Danfoss</p>
                         </div>
                     </div>
+                    <div class="arrow" id="arrow0">▼</div>
                 </div>
-                <div class="charger-box status-red" onclick="toggleComponents('components1')">
+                <div class="charger-box status-red" onclick="toggleComponents('components1', 'arrow1')">
                     <h3>Charger 1 (EVgo)</h3>
                     <div class="section-container">
                         <div class="section">
@@ -424,8 +435,9 @@
                             </div>
                         </div>
                     </div>
+                    <div class="arrow" id="arrow1">▼</div>
                 </div>
-                <div class="charger-box status-yellow" onclick="toggleComponents('components2')">
+                <div class="charger-box status-yellow" onclick="toggleComponents('components2', 'arrow2')">
                     <h3>Charger 2 (Electrify America)</h3>
                     <div class="section-container">
                         <div class="section">
@@ -501,8 +513,9 @@
                             <p>Supplier: Danfoss</p>
                         </div>
                     </div>
+                    <div class="arrow" id="arrow2">▼</div>
                 </div>
-                <div class="charger-box status-yellow" onclick="toggleComponents('components3')">
+                <div class="charger-box status-yellow" onclick="toggleComponents('components3', 'arrow3')">
                     <h3>Charger 3 (ChargePoint)</h3>
                     <div class="section-container">
                         <div class="section">
@@ -587,6 +600,7 @@
                             </div>
                         </div>
                     </div>
+                    <div class="arrow" id="arrow3">▼</div>
                 </div>
                 <section class="support">
                     <hgroup>
