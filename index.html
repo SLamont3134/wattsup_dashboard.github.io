@@ -153,6 +153,13 @@
         h2, h3 {
             color: #AA4EB0; /* Light purple text */
         }
+        h1.title {
+            text-align: center;
+            font-size: 3em;
+            color: #AA4EB0;
+            font-family: 'Bebas Neue', sans-serif;
+            margin-top: 20px;
+        }
         .components {
             display: none;
             flex-direction: column;
@@ -281,10 +288,7 @@
         
         <main>
             <div class="content">
-                <hgroup>
-                    <h2>Charger Overview</h2>
-                    <h3>Monitor the health of all EV chargers</h3>
-                </hgroup>
+                <h1 class="title">Charger Overview</h1>
                 <div class="charger-box status-green" onclick="toggleComponents('components0', 'arrow0')">
                     <h3>Charger 0 (EVgo)</h3>
                     <div class="section-container">
@@ -606,7 +610,8 @@
                 <section class="support">
                     <hgroup>
                         <h2>Technical Support</h2>
-                        <h3>Contact us for assistance</hgroup>
+                        <h3>Contact us for assistance</h3>
+                    </hgroup>
                     <button onclick="showPopup()">Get Help</button>
                 </section>
                 <footer>

@@ -138,6 +138,13 @@
         h2, h3 {
             color: #AA4EB0; /* Light purple text */
         }
+        h1.title {
+            text-align: center;
+            font-size: 3em;
+            color: #AA4EB0;
+            font-family: 'Bebas Neue', sans-serif;
+            margin-top: 20px;
+        }
         .analytics {
             display: none;
         }
@@ -327,10 +334,7 @@
         </nav>
         <main>
             <div class="content">
-                <hgroup>
-                    <h2>Analytics Overview</h2>
-                    <h3>Monitor the performance and efficiency of all EV chargers</h3>
-                </hgroup>
+                <h1 class="title">Analytics Overview</h1>
 
                 <div class="charger-box" onclick="toggleAnalytics('analytics0', 'arrow0')">
                     <h3>Charger 0 (EVgo)</h3>
